@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  matricule: MyString
+  email: MyString
+  name: MyString
+  password: MyString
+  classname: MyString
+
+two:
+  matricule: MyString
+  email: MyString
+  name: MyString
+  password: MyString
+  classname: MyString
