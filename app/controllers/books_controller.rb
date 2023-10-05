@@ -8,7 +8,7 @@ class BooksController < ApplicationController
   end
    
   def books_students	
-	@books = Book.all.where(:library_id => Library.select('id').where(:university => Student.select('university').where(:email => current_student.email)))
+	@books = Book.all.where(:email => current_student.email)
 	@books_all = Book.all
   end
 

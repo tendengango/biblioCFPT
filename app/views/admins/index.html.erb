@@ -1,31 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Admins</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Password</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @admins.each do |admin| %>
-      <tr>
-        <td><%= admin.name %></td>
-        <td><%= admin.email %></td>
-        <td><%= admin.password %></td>
-        <td><%= link_to 'Show', admin %></td>
-        <td><%= link_to 'Edit', edit_admin_path(admin) %></td>
-        <td><%= link_to 'Destroy', admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<h1>Admin Panel</h1>
+Name: <%= current_admin.name %><br>
+Email: <%=  current_admin.email %><br>
 <br>
+<br>
+<table>
+  <th><strong>Admin Rights</strong></th>
 
-<%= link_to 'New Admin', new_admin_path %>
+  <tr><td><%= link_to 'Edit Profile', edit_admin_path(current_admin) %></td></tr>
+  <tr><td></td><tr>
+  <tr><td></td><tr>
+  <tr><td><strong>Librarians</strong></td><tr>
+  <tr><td><%= link_to 'Add Librarian', new_librarian_path %></td></tr>
+  <tr><td><%= link_to 'View Librarians (Details/Edit/Delete/Approve)', show_librarians_path %></td></tr>
+  <tr><td></td><tr>
+  <tr><td></td><tr>
+  <tr><td><strong>Students</strong></td><tr>
+  <tr><td><%= link_to 'Add Student', new_student_path %></td></tr>
+  <tr><td><%= link_to 'View Students (Details/Edit)', show_students_path %></td></tr>  
+  <tr><td><%= link_to 'List of Students who have Checked Out Books', list_checkedoutBooksAndStudentsAdmin_path %></td></tr>  
+  <tr><td><%= link_to 'View Students with Overdue Fine', getOverdueBooks_path %></tr>
+  <tr><td></td><tr>
+  <tr><td></td><tr>
+  <tr><td><strong>Books</strong></td><tr>
+  <tr><td><%= link_to 'Add Book', add_books_path %></td></tr>
+  <tr><td><%= link_to 'View Books (Details/Borrowing History/Edit/Delete)', show_books_path %></tr>
+  <tr><td><%= link_to 'View Checked Out Books', list_checkedoutBooks_path %></tr>  
+  
+    
+</table>
