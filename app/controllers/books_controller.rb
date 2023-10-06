@@ -4,7 +4,6 @@ class BooksController < ApplicationController
   # GET /books or /books.json
   def index
     @books = Book.all
-
   end
    
   def books_students	
@@ -120,16 +119,16 @@ def checkout # check if the given book is a special book or not
         flash[:notice] = "Book Already Checked Out!!!"
       
     else
-      if(@book.count>0)
+      if(@book.quantity>0)
         
-        @t = Checkout.where(:student_id => current_student.id, :return_date => nil).count
+        @t = Checkout.where(:student_id => current_student.id, :return_date => nil).quantity
           if Checkout.where(:student_id => current_student.id , :book_id => @book.id, :return_date => nil).first.nil?
-            @checkout = Checkout.new(:student_id => current_student.id , :book_id => @book.id , :issue_date => Date.today , :return_date =>nil , :validity => Library.find(@book.library_id).borrow_limit)
+            #@checkout = Checkout.new(:student_id => current_student.id , :book_id => @book.id , :issue_date => Date.today , :return_date =>nil , :validity => Library.find(@book.library_id).borrow_limit)
             flash[:notice] = "Book Successfully Checked Out"
             puts params[:id]
-            puts @book.count
-            @book.decrement(:count)
-            puts @book.count
+            puts @book.quantity
+            @book.decrement(:quantity)
+            puts @book.quantity
             @user = current_student
             UserMailer.checkout_email(@user,@book).deliver_now
             @checkout.save!
@@ -151,7 +150,7 @@ def checkout # check if the given book is a special book or not
     if admin_signed_in?
       @checkouts = Checkout.where(:return_date => nil)
     else
-      @checkouts = Checkout.where(:return_date => nil, :book_id => Book.select('id').where(:library_id => Library.select('id').where(:name => current_librarian.library )))
+      @checkouts = Checkout.where(:return_date => nil, :book_id => Book.select('id'))
     end    
     if !@checkouts.nil?
       @fines = Array.new
@@ -177,7 +176,7 @@ def checkout # check if the given book is a special book or not
 
   def list_checkedoutBooksAndStudentsAdmin
 	#@results = Checkout.joins('INNER JOIN Students s ON s.id = Checkouts.student_id INNER JOIN Books b ON b.id = Checkouts.book_id')
-	@results = Checkout.select(:'students.name',:'students.email',:'students.education_level',:'students.university',:'books.isbn',:'books.title',:'books.authors',:issue_date,:return_date,:'books.language',:'books.published',:'books.edition',:'books.subject',:'books.summary',:'books.category',:'books.special_collection').joins(:student).joins(:book)
+	@results = Checkout.select(:'students.name',:'students.email',:'books.isbn',:'books.title',:'books.authors',:issue_date,:return_date,:'books.language',:'books.published',:'books.edition',:'books.summary').joins(:student).joins(:book)
   end
   
   private

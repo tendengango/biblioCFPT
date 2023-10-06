@@ -1,0 +1,33 @@
+
+<h3><u>All Books</u></h3>
+<table>
+  <thead>
+    <tr>
+      <th>Isbn</th>
+      <th>Title</th>
+      <th>Authors</th>
+      <th>Language</th>
+      <th>Published</th>
+      <th>Edition</th>
+      <th>Subject</th>
+      <th>Summary</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.isbn %></td>
+        <td><%= book.title %></td>
+        <td><%= book.authors %></td>
+        <td><%= book.language %></td>
+        <td><%= book.published %></td>
+        <td><%= book.edition %></td>
+        <td><%= book.subject %></td>
+        <td><%= book.summary %></td>
+        <td><%= book.quantity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

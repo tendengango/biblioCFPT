@@ -2,4 +2,6 @@
 
 <%= render 'form', librarian: @librarian %>
 
-<%= link_to 'Back', librarians_path %>
+<% if current_admin.nil? %>
+	<%= link_to 'Back', librarians_path %>
+<% end %>
