@@ -20,7 +20,6 @@
       <th>Title</th>
       <th>Authors</th>
       <th>Language</th>
-      <th>Subject</th>
       <th>Available Count</th>
       <th colspan="4"></th>
     </tr>
@@ -33,8 +32,8 @@
         <td><%= book.title %></td>
         <td><%= book.authors %></td>
         <td><%= book.language %></td>
-        <td><%= book.subject %></td>
-        <td><%= book.count %></td>
+       
+        <td><%= book.quantity %></td>
         <% if current_admin.nil? %>          
           <td><%= link_to 'Checkout', controller: "books", action: "checkout", id: book %></td>
           
