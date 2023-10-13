@@ -14,11 +14,13 @@ Rails.application.routes.draw do
 
   root "home#index"
   get '/search' => 'books#search', :as => 'search'
+  get '/returnBook' => 'books#returnBook', :as => 'returnBook'
   get '/checkout' => 'books#checkout', :as => 'checkout'
   get '/books_students' => 'books#books_students', :as => 'books_students'
   get '/list_checkedoutBooksAndStudentsAdmin' => 'books#list_checkedoutBooksAndStudentsAdmin', :as => 'list_checkedoutBooksAndStudentsAdmin'
   get '/list_checkedoutBooks' => 'books#list_checkedoutBooks', :as => 'list_checkedoutBooks'
   get '/show_librarians' => 'admins#show_librarians', :as => 'show_librarians'
+  get '/restricted' => 'librarians#restricted', :as => 'restricted'
   get '/show_students' => 'admins#show_students', :as => 'show_students'
   get '/show_books' => 'admins#show_books', :as => 'show_books'
   get '/add_books' => 'books#new', :as => 'add_books'

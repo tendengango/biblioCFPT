@@ -1,5 +1,7 @@
+
 <%= form_with(model: librarian, local: true) do |form| %>
   <% if librarian.errors.any? %>
+  
     <div id="error_explanation">
       <h2><%= pluralize(librarian.errors.count, "error") %> prohibited this librarian from being saved:</h2>
 
@@ -10,7 +12,7 @@
       </ul>
     </div>
   <% end %>
-
+<div class="container">
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
@@ -37,4 +39,5 @@
   <div class="actions">
     <%= form.submit %>
   </div>
+</div>
 <% end %>

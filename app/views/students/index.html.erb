@@ -4,21 +4,3 @@
 
 Name: <%= current_student.name %><br>
 Email: <%=  current_student.email %><br>
-<br>
-<br>
-<table>
-  <th><strong>Student Rights</strong></th>
-  
-  <tr><td></td><tr>
-  <tr><td><%= link_to "Edit profile", edit_student_path(current_student) %></td></tr>
-  <tr><td></td><tr>
-  <tr><td></td><tr>
-  <tr><td><strong>Books</strong></td><tr>
-  <tr><td><%= link_to 'View Books', books_students_path %></td></tr>
-  <tr><td></td><tr>
-  <tr><td></td><tr>
-  
-  <tr><td><strong>Your Data</strong></td><tr>
-  <tr><td><%= link_to 'Your Activity (Checkouts)', getBookmarkBooks_path %></td></tr>
-  <tr><td><%= link_to 'Books Fines', getStudentBookFine_path %></td></tr>
-</table>
