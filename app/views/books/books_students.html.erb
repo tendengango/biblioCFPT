@@ -42,11 +42,21 @@
         <td><%= book.edition %></td>
         <td><%= book.summary %></td>
         
-        
                 <% if book.quantity > 0 %> 
           <td><%= "Available" %></td>
         <%else%>
         <td><%= "Unavailable" %></td>
+        <%end%>
+        <% if current_admin.nil? %>
+          <td><%= link_to 'Show', book %></td>
+          <% if book.quantity < 1 %> 
+            <% flash[:notice] = "Checkout not possible!!"%> 
+          <%else%>
+            <td><%= link_to 'Checkout', controller: "books", action: "checkout", id: book %></td>
+          <%end%>
+          
+        <% else %>
+          <td><%= link_to 'View Book History', controller: "books", action: "viewBookHistory", id: book %></td>
         <%end%>
       </tr>
     <% end %>

@@ -9,7 +9,7 @@
       <th>Language</th>
       <th>Published</th>
       <th>Edition</th>
-      <th>Subject</th>
+      
       <th>Summary</th>
       <th>Quantity</th>
     </tr>
@@ -24,9 +24,12 @@
         <td><%= book.language %></td>
         <td><%= book.published %></td>
         <td><%= book.edition %></td>
-        <td><%= book.subject %></td>
+        
         <td><%= book.summary %></td>
         <td><%= book.quantity %></td>
+        <td><%= link_to 'Show/Edit', book %></td>
+        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'View Book History', controller: "books", action: "viewBookHistory", id: book %></td>
       </tr>
     <% end %>
   </tbody>
