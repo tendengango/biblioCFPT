@@ -39,6 +39,7 @@
         <td><%= book.edition %></td>
         <td><%= book.summary %></td>
         <td><%= book.quantity %></td>
+        <td><%= image_tag book.portrait.variant(resize_to_limit: [200, 200]) %></td>
         <td><%= link_to 'Show', book %></td>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
         <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>

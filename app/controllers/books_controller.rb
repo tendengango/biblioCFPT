@@ -125,7 +125,7 @@ class BooksController < ApplicationController
             @book.decrement(:quantity)
             puts @book.quantity
             @user = current_student
-            #UserMailer.checkout_email(@user,@book).deliver_now
+            UserMailer.checkout_email(@user,@book).deliver_now
             @checkout.save!
             @book.save!
           else 
@@ -144,13 +144,11 @@ class BooksController < ApplicationController
         else
           flash[:notice] = "Book Already Checked Out!!!"
         end
-      #end
+    
       if !current_student.nil?
-        # if a==1
-        #   redirect_to books_students_path, noitce: 'You cannot issue more books.'
-        # end
+        
       end
-    #end
+   
     redirect_to books_students_path
   end
 
@@ -159,9 +157,9 @@ class BooksController < ApplicationController
     if !@checkouts.nil?
       @fines = Array.new
       @checkouts.each do |checkout|
-        if checkout.issue_date + checkout.validity < Date.today
-          delay = (Date.today - checkout.issue_date).to_i - checkout.validity
-          fine_per_day  = Library.find(Book.find(checkout.book_id).library_id).overdue_fines
+        if checkout.issue_date + 15 < Date.today
+          delay = (Date.today - checkout.issue_date).to_i - 15
+          #fine_per_day  = Library.find(Book.find(checkout.book_id).library_id).overdue_fines
           @fines.push({:fine_ammount => delay * fine_per_day, :book_id => checkout.book_id})
         else
           @fines.push({:fine_ammount => 0, :book_id => checkout.book_id})
@@ -187,7 +185,7 @@ class BooksController < ApplicationController
         @checkout.save!
         flash[:notice] = "Book Successfully returned"
         @user = current_student
-        #UserMailer.returnbook_email(@user,@book).deliver_now
+        UserMailer.returnbook_email(@user,@book).deliver_now
         @book.increment(:quantity)
         @book.save!
       else 
@@ -254,7 +252,7 @@ class BooksController < ApplicationController
   end
 
   def list_checkedoutBooks
-    #ook.where(isbn: Transaction.select('isbn').where(email: current_student.email,bookmarks: true))
+    #book.where(isbn: Transaction.select('isbn').where(email: current_student.email,bookmarks: true))
     @books = Book.where(id: Checkout.select('book_id').where(:return_date =>nil))
   end
 
@@ -271,7 +269,7 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:isbn, :title, :authors, :language, :published, :edition, :summary, :quantity)
+      params.require(:book).permit(:isbn, :title, :authors, :language, :published, :edition, :summary, :quantity, :portrait)
     end
 end
 
