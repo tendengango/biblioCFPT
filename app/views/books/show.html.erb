@@ -39,6 +39,11 @@
   <strong>Quantity:</strong>
   <%= @book.quantity %>
 </p>
-<%= image_tag @book.portrait.variant(resize_to_limit: [200, 200]) if @book.portrait.attached? %>
+<p>
+  <strong>Portrait:</strong>
+  <%= image_tag @book.portrait.variant(resize_to_limit: [200, 200]) if @book.portrait.attached? %>
+</p>
+
+
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
