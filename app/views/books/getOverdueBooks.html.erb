@@ -1,4 +1,4 @@
-<h1> Overdue Books and Fine</h1>
+<h1> Overdue Books</h1>
 <table>
   <thead>
     <tr>
@@ -7,7 +7,7 @@
       <th>Author</th>
       <th>Edition</th>
       <th>Category</th>
-      <th>Fine</th>
+      
       <th colspan="4"></th>
     </tr>
   </thead>
@@ -22,7 +22,7 @@
           <td><%= Book.find(fine[:book_id]).authors %></td>
           <td><%= Book.find(fine[:book_id]).edition %></td>
           <td><%= Book.find(fine[:book_id]).category %></td>
-          <td><%= fine[:fine_ammount] %></td>
+          
         </tr>
       <%end %>
     <% end %>

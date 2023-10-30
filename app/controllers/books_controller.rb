@@ -238,10 +238,10 @@ class BooksController < ApplicationController
       @fines = Array.new
       @checkouts.each do |checkout|
         if checkout.issue_date + 15 < Date.today
-          delay = (Date.today - checkout.issue_date).to_i - checkout.validity
-          @fines.push({:fine_ammount => delay * fine_per_day, :book_id => checkout.book_id , :student_id => checkout.student_id})
-        else
-          @fines.push({:fine_ammount => 0, :book_id => checkout.book_id ,:student_id => checkout.student_id})
+          delay = (Date.today - checkout.issue_date).to_i - 15
+         # @fines.push({:fine_ammount => delay * fine_per_day, :book_id => checkout.book_id , :student_id => checkout.student_id})
+        #else
+          #@fines.push({:fine_ammount => 0, :book_id => checkout.book_id ,:student_id => checkout.student_id})
         end
       end
     end
