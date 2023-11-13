@@ -49,12 +49,12 @@
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
- server "example.com",
+ server "3.224.117.185",
    user: "ec2-user",
-   roles: %w{web app},
+   roles: %w{web db app},
    ssh_options: {
      user: "ec2-user", # overrides user setting above
-     keys: %w(/home/ango/.ssh/dic_sample),
+     keys: %w(/home/ango/.ssh/keypair/bibliocfptkey.pem),
      forward_agent: false,
      auth_methods: %w(publickey password)
 #     # password: "please use keys"
