@@ -83,3 +83,4 @@ production:
   database: biblioCFPT_production
   username: biblioCFPT
   password: <%= ENV['BIBLIOCFPT_DATABASE_PASSWORD'] %>
+g
