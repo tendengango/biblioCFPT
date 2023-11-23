@@ -109,16 +109,20 @@ class BooksController < ApplicationController
 			redirect_to('index', alert: "Empty field!")
 	  end  
   end
+  def validity
+    @validity=15
+  end
 
   def librarian_book_view
     @books = Book.all
   end
 
  def checkout # check if the given book is a special book or not
+    @borrow_limit=15
     @book = Book.find(params[:id])
    
           if Checkout.where(:student_id => current_student.id , :book_id => @book.id, :return_date => nil).first.nil?
-            @checkout = Checkout.new(:student_id => current_student.id , :book_id => @book.id , :issue_date => Date.today , :return_date =>nil)
+            @checkout = Checkout.new(:student_id => current_student.id , :book_id => @book.id , :issue_date => Date.today , :return_date =>nil, :validity=>@book.validity)
             flash[:notice] = "Book Successfully Checked Out"
             puts params[:id]
             puts @book.quantity
@@ -157,8 +161,8 @@ class BooksController < ApplicationController
     if !@checkouts.nil?
       @fines = Array.new
       @checkouts.each do |checkout|
-        if checkout.issue_date + 15 < Date.today
-          delay = (Date.today - checkout.issue_date).to_i - 15
+        if checkout.issue_date + validity < Date.today
+          delay = (Date.today - checkout.issue_date).to_i - validity
           #fine_per_day  = Library.find(Book.find(checkout.book_id).library_id).overdue_fines
           @fines.push({:fine_ammount => delay * fine_per_day, :book_id => checkout.book_id})
         else
@@ -205,7 +209,7 @@ class BooksController < ApplicationController
         else
           @checkout = Checkout.where(:student_id => current_student.id , :book_id => @book.id )
           @checkout.update( :return_date => Date.today)
-          @checkout_new = Checkout.new(:student_id => @hold_request.student_id , :book_id => @hold_request.book_id , :issue_date => Date.today , :return_date =>nil , :validity => Library.find(@book.library_id).borrow_limit)
+          @checkout_new = Checkout.new(:student_id => @hold_request.student_id , :book_id => @hold_request.book_id , :issue_date => Date.today , :return_date =>nil , :validity => @book.borrow_limit)
           @checkout_new.save!
           flash[:notice] = "Book Successfully returned"
           UserMailer.checkout_email(User.find(@hold_request.student_id),@book).deliver_now
@@ -223,9 +227,6 @@ class BooksController < ApplicationController
     
   end
 
-  def validity
-    @validity=15
-  end
 
   def getOverdueBooks
     
@@ -238,7 +239,7 @@ class BooksController < ApplicationController
       @fines = Array.new
       @checkouts.each do |checkout|
         if checkout.issue_date + 15 < Date.today
-          delay = (Date.today - checkout.issue_date).to_i - 15
+          delay = (Date.today - checkout.issue_date).to_i - validity
          # @fines.push({:fine_ammount => delay * fine_per_day, :book_id => checkout.book_id , :student_id => checkout.student_id})
         #else
           #@fines.push({:fine_ammount => 0, :book_id => checkout.book_id ,:student_id => checkout.student_id})
