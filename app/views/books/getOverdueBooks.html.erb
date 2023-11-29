@@ -1,4 +1,5 @@
-<h1> Overdue Books</h1>
+<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
+<h1>Dépassement de délais</h1>
 <table>
   <thead>
     <tr>
@@ -6,22 +7,22 @@
       <th>Title</th>
       <th>Author</th>
       <th>Edition</th>
-      <th>Category</th>
+     
       
-      <th colspan="4"></th>
+      
     </tr>
   </thead>
 
   <tbody>
   <% if ! @fines.nil? %>
     <% @fines.each do |fine| %>
-      <% if fine[:fine_ammount] > 0 %>
+      <% if fine[:delay] > 0 %>
         <tr>
           <td><%= Student.find(fine[:student_id]).name %></td>
           <td><%= Book.find(fine[:book_id]).title %></td>
           <td><%= Book.find(fine[:book_id]).authors %></td>
           <td><%= Book.find(fine[:book_id]).edition %></td>
-          <td><%= Book.find(fine[:book_id]).category %></td>
+          
           
         </tr>
       <%end %>
@@ -35,5 +36,5 @@
 <% if !current_librarian.nil? %>
 	<%= link_to 'Back', librarians_path %>
 <% else %>
-	<%= link_to 'Back', students_path %>
+	<%= link_to 'Back', show_books_path %>
 <% end %>

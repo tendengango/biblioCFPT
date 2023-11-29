@@ -1,6 +1,7 @@
+<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
 <p id="notice"><%= notice %></p>
 
-<h1>Books</h1>
+<h1>Livres</h1>
 <%= form_tag(search_path, :method => "get" , :required => true) do %>  
   
   <%= radio_button_tag(:search_by,"title",:checked => true,) %>Title
@@ -26,7 +27,6 @@
       <th>Published</th>
       <th>Edition</th>
       <th>Summary</th>
-     
       <th>Availability</th>
     </tr>
   </thead>
@@ -63,4 +63,4 @@
   </tbody>
 </table>
 
-<%= link_to 'Back', students_path %>
+<%= link_to 'Retour', students_path %>

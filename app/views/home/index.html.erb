@@ -1,16 +1,16 @@
-<h1>BIENVENUS SUR BIBLIO-CFPT</h1>
-<table>
+<h1 class="text-center">BIENVENUS SUR BIBLIO-CFPT</h1>
+<p id="notice"><%= notice %></p>
+<div class="container">
+<table class="table table-bordered table-striped text-center">
 	<th><strong>Votre Bibliothèque en Ligne</strong></th>
-	<tr><td></td><tr>
-    <tr><td></td><tr>
-    <tr><td><strong>Students</strong></td><tr>
-    <tr><td><%= link_to 'Student Login (via Email or Google)', new_student_session_path %></td></tr>
-	<tr><td></td><tr>
-    <tr><td></td><tr>
-	<tr><td><strong>Librarians</strong></td><tr>
-    <tr><td><%= link_to 'Librarian Login', new_librarian_session_path %></td></tr>
-	<tr><td></td><tr>
-    <tr><td></td><tr>
-	<tr><td><strong>Administrator</strong></td><tr>
-    <tr><td><%= link_to 'Admin Login', new_admin_session_path %></td></tr>
+	
+    <tr><td><strong>Vous êtes Etudiant</strong></td><tr>
+    <tr><td><%= link_to 'Connexion Etudiant', new_student_session_path %></td></tr>
+	
+	<tr><td><strong>Vous êtes Bibliothècaire</strong></td><tr>
+    <tr><td><%= link_to 'Connexion Bibliothècaire', new_librarian_session_path %></td></tr>
+	
+	<tr><td><strong>Vous êtes Administrateur</strong></td><tr>
+    <tr><td><%= link_to 'Connexion Administrateur', new_admin_session_path %></td></tr>
 </table>
+<div>

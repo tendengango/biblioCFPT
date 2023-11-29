@@ -1,3 +1,4 @@
+<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -44,6 +45,25 @@
   <%= image_tag @book.portrait.variant(resize_to_limit: [200, 200]) if @book.portrait.attached? %>
 </p>
 
+<p>
+  <strong>Disponible:</strong>
+  <%= @book.quantity %>
+</p>
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+
+
+
+<% if current_admin.nil? and current_librarian.nil? and current_student.nil? %>          
+	<%= link_to 'Back', books_path %>
+<% end %>
+<% if !current_admin.nil? %>
+	<td><%= link_to 'Edit', edit_book_path %></td>
+	<%= link_to 'Back', show_books_path %>
+<% end %>
+<% if !current_librarian.nil? %>
+	<td><%= link_to 'Edit', edit_book_path %></td>
+	<%= link_to 'Back', librarian_book_view_path %>
+<% end %>
+<% if !current_student.nil? %>
+	<%= link_to 'Back', books_students_path %>
+<% end %>
