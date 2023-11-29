@@ -1,6 +1,5 @@
+<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
 <p id="notice"><%= notice %></p>
-
-
 <p>
  <table>
   <thead>
@@ -10,11 +9,10 @@
       <th>Authors</th>
       <th>Language</th>
       <th>Published</th>
-      <th>Edition</th>
-      <th>Subject</th>
+    
       <th>Summary</th>
-      <th>Category</th>
-      <th colspan="4"></th>
+      
+     
     </tr>
   </thead>
 
@@ -26,13 +24,10 @@
         <td><%= result.authors %></td>
         <td><%= result.language %></td>
         <td><%= result.published %></td>
-        <td><%= result.edition %></td>
-        <td><%= result.subject %></td>
-        <td><%= result.summary %></td>
-        <td><%= result.category %></td>
-        
-		<% if current_student.nil? %>
-		<td><%= link_to 'Show', controller: "books", action: "show", id: result%></td>
+      
+        <td><%= result.summary %></td>  
+		<% if current_admin.nil? %>
+		    <td><%= link_to 'Show', controller: "books", action: "show", id: result%></td>
         <td><%= link_to 'Checkout', controller: "books", action: "checkout", id: result %></td>
         
 		<% end %>

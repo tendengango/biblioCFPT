@@ -11,43 +11,44 @@
   </head>
 
   <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <%= link_to "Biblio CFPT", root_path, class: "navbar-brand" %>
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <%= link_to "Biblio CFPT", root_path, class: "navbar-brand bg-transparent" %>
     
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <% if student_signed_in?%>
           <%= link_to "Logout", destroy_student_session_path, method: :delete, class:"text-bg-primary p-3" %>
-          <%= link_to 'Back', students_path, class:"text-bg-primary p-3" %>
-          <%= link_to "Edit profile", edit_student_path(current_student), class:"text-bg-primary p-3" %>
-          <%= link_to 'View Books', books_students_path, class:"text-bg-primary p-3" %>
-          <%= link_to 'Your Activity (Checkouts)', getBookmarkBooks_path, class:"text-bg-primary p-3" %>
-          <!--<%= link_to 'Books Fines', getStudentBookFine_path, class: "nav-item nav-link" %>-->
+          <%= link_to 'Retour', students_path, class:"text-bg-primary p-3" %>
+          <%= link_to "Editer profil", edit_student_path(current_student), class:"text-bg-primary p-3" %>
+          <%= link_to 'Tous les Livres', books_students_path, class:"text-bg-primary p-3" %>
+          <%= link_to 'Votre activité (Emprunts)', getBookmarkBooks_path, class:"text-bg-primary p-3" %>
+          
           
           <%end%>
           <% if librarian_signed_in?%>
           <%= link_to "Logout", destroy_librarian_session_path, method: :delete, class:"text-bg-primary p-3"%>
-          <%= link_to 'Back', librarians_path, class: "nav-item nav-link" %>
-          <%= link_to 'Edit Profile', edit_librarian_path(current_librarian), class:"text-bg-primary p-3" %></td>
-          <%= link_to 'Add New Book', new_book_path %>
-          <%= link_to 'All Books (Details/Edit/Delete/Borrowing History)', librarian_book_view_path, class:"text-bg-primary p-3" %>
-          <%= link_to 'Checked Out Books', list_checkedoutBooks_path, class:"text-bg-primary p-3" %>
-          <%= link_to 'Students/Checked Out Books', list_checkedoutBooksAndStudentsAdmin_path, class:"text-bg-primary p-3" %>
-          <%= link_to 'Overdue Books and Student Fine', getOverdueBooks_path, class:"text-bg-primary p-3" %>
+          <%= link_to 'Retour', librarians_path, class: "text-bg-primary p-3" %>
+          <%= link_to 'Editer Profil', edit_librarian_path(current_librarian), class:"text-bg-primary p-3" %></td>
+          <%= link_to 'Ajout Livre', new_book_path, class: "text-bg-primary p-3" %>
+          <%= link_to 'Tous les Livres', librarian_book_view_path, class:"text-bg-primary p-3" %>
+          <%= link_to 'Livres empruntés', list_checkedoutBooks_path, class:"text-bg-primary p-3" %>
+          <%= link_to 'Vue Livres empruntés ', list_checkedoutBooksAndStudentsAdmin_path, class:"text-bg-primary p-3" %>
+          <%= link_to 'Delais dépassé ', getOverdueBooks_path, class:"text-bg-primary p-3" %>
           
           <%end%>
           <% if admin_signed_in?%>
           <%= link_to "Logout", destroy_librarian_session_path, method: :delete, class:"text-bg-primary p-3"%>
           <%= link_to 'Back', admins_path, class:"text-bg-primary p-3" %>
-          <%= link_to 'Edit Profile', edit_admin_path(current_admin), class:"text-bg-primary p-3" %>
-          <%= link_to 'Add Librarian', new_librarian_path, class:"text-bg-primary p-3" %>
-          <%= link_to 'View Librarians', show_librarians_path, class:"text-bg-primary p-3" %>
-          <%= link_to 'Add Student', new_student_path, class:"text-bg-primary p-3" %>
-          <%= link_to 'View Students', show_students_path, class:"text-bg-primary p-3" %>
-          <%= link_to 'View Students with Overdue Fine', getOverdueBooks_path, class:"text-bg-primary p-3" %>
-          <%= link_to 'Add Book', add_books_path, class:"text-bg-primary p-3" %>
-          <%= link_to 'View Books', show_books_path, class:"text-bg-primary p-3" %>
-          <%= link_to 'View Checked Out Books', list_checkedoutBooks_path, class:"text-bg-primary p-3" %>
+          <%= link_to 'Editer Profil', edit_admin_path(current_admin), class:"text-bg-primary p-3" %>
+          <%= link_to 'Ajout Biblothècaire', new_librarian_path, class:"text-bg-primary p-3" %>
+          <%= link_to 'Voir Bibliothècaires', show_librarians_path, class:"text-bg-primary p-3" %>
+          <%= link_to 'Ajout Etudiant', new_student_path, class:"text-bg-primary p-3" %>
+          <%= link_to 'Liste Etudiants', show_students_path, class:"text-bg-primary p-3" %>
+          <%= link_to 'Liste Etudiant/Delais dépassé', getOverdueBooks_path, class:"text-bg-primary p-3" %>
+          
+          <%= link_to 'Ajout Livre', add_books_path, class:"text-bg-primary p-3" %>
+          <%= link_to 'Liste Livres', show_books_path, class:"text-bg-primary p-3" %>
+          <%= link_to 'Livres empruntés', list_checkedoutBooks_path, class:"text-bg-primary p-3" %>
 
           <%end%>
         </div>

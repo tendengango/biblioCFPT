@@ -11,8 +11,11 @@ class LibrariansController < ApplicationController
       redirect_to students_path, notice: 'Action not allowed.'
     else
        @lib = Librarian.find_by(:email => current_librarian.email)
-       if @lib.approved == 'No'
-       redirect_to restricted_path
+       if @lib.approved != 'Yes' 
+       redirect_to root_path, notice: 'Demander a votre admin de vous valider.'
+       #redirect_to restricted_path
+
+       
        else
           @librarians = Librarian.all 
         end
