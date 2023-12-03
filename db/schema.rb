@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_28_061545) do
+ActiveRecord::Schema.define(version: 2023_12_01_115105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2023_09_28_061545) do
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "available_quantity"
   end
 
   create_table "checkouts", force: :cascade do |t|
@@ -71,12 +72,6 @@ ActiveRecord::Schema.define(version: 2023_09_28_061545) do
     t.bigint "book_id", null: false
     t.index ["book_id"], name: "index_checkouts_on_book_id"
     t.index ["student_id"], name: "index_checkouts_on_student_id"
-  end
-
-  create_table "covers", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "librarians", force: :cascade do |t|

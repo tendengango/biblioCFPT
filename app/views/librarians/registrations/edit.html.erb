@@ -1,10 +1,11 @@
+<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "librarians/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :nom %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
   </div>
 

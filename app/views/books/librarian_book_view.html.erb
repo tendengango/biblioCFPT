@@ -1,17 +1,17 @@
 <div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
-<h3><u>Alls Books</u></h3>
+<h3><u>Tous les livres</u></h3>
 <table>
   <thead>
     <tr>
       <th>Isbn</th>
-      <th>Title</th>
-      <th>Authors</th>
-      <th>Language</th>
-      <th>Published</th>
+      <th>Titre</th>
+      <th>Auteurs</th>
+      <th>Langue</th>
+      <th>Date Publication</th>
       <th>Edition</th>
       
-      <th>Summary</th>
-      <th>Quantity</th>
+      <th>Resumé</th>
+      <th>Quantité</th>
     </tr>
   </thead>
 
@@ -27,8 +27,8 @@
         
         <td><%= book.summary %></td>
         <td><%= book.quantity %></td>
-        <td><%= link_to 'Show/Edit', book %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show/Edit', book, class:"p-3 mb-2 bg-primary text-white" %></td>
+        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } ,class:"p-3 mb-2 bg-danger text-white" %></td>
         <td><%= link_to 'View Book History', controller: "books", action: "viewBookHistory", id: book %></td>
       </tr>
     <% end %>

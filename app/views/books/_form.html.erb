@@ -14,42 +14,42 @@
 
   <div class="field">
     <%= form.label :isbn %>
-    <%= form.text_field :isbn %>
+    <%= form.text_field :isbn, placeholder: "Isbn du livre" %>
   </div>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.label :titre %>
+    <%= form.text_field :title, placeholder: "Saisir le titre du livre" %>
   </div>
 
   <div class="field">
-    <%= form.label :authors %>
-    <%= form.text_field :authors %>
+    <%= form.label :auteurs %>
+    <%= form.text_field :authors, placeholder: "Saisir les noms des auteurs"%>
   </div>
 
   <div class="field">
-    <%= form.label :language %>
-    <%= form.text_field :language %>
+    <%= form.label :langue %>
+    <%= form.text_field :language, placeholder: "Saisir la langue du livre ex Français" %>
   </div>
 
   <div class="field">
-    <%= form.label :published %>
+    <%= form.label :Date_Publication %>
     <%= form.date_select :published %>
   </div>
 
   <div class="field">
     <%= form.label :edition %>
-    <%= form.text_field :edition %>
+    <%= form.text_field :edition, placeholder: "Saisir la maison d'édition du livre" %>
   </div>
 
   <div class="field">
-    <%= form.label :summary %>
-    <%= form.text_area :summary %>
+    <%= form.label :résumé %>
+    <%= form.text_area :summary, placeholder: "Resumé du livre -100 caracteres du livre" %>
   </div>
 
   <div class="field">
-    <%= form.label :quantity %>
-    <%= form.number_field :quantity %>
+    <%= form.label :quantité %>
+    <%= form.number_field :quantity, placeholder: "quantité du livre < à 100" %>
   </div>
 
   <div class="field">

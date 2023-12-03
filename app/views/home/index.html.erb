@@ -1,3 +1,4 @@
+<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
 <h1 class="text-center">BIENVENUS SUR BIBLIO-CFPT</h1>
 <p id="notice"><%= notice %></p>
 <div class="container">
@@ -5,12 +6,12 @@
 	<th><strong>Votre Bibliothèque en Ligne</strong></th>
 	
     <tr><td><strong>Vous êtes Etudiant</strong></td><tr>
-    <tr><td><%= link_to 'Connexion Etudiant', new_student_session_path %></td></tr>
+    <tr><td><%= link_to 'Connexion Etudiant', new_student_session_path, class:"p-3 mb-2 bg-success text-white" %></td></tr>
 	
 	<tr><td><strong>Vous êtes Bibliothècaire</strong></td><tr>
-    <tr><td><%= link_to 'Connexion Bibliothècaire', new_librarian_session_path %></td></tr>
+    <tr><td><%= link_to 'Connexion Bibliothècaire', new_librarian_session_path, class:"p-3 mb-2 bg-success text-white" %></td></tr>
 	
 	<tr><td><strong>Vous êtes Administrateur</strong></td><tr>
-    <tr><td><%= link_to 'Connexion Administrateur', new_admin_session_path %></td></tr>
+    <tr><td><%= link_to 'Connexion Administrateur', new_admin_session_path, class:"p-3 mb-2 bg-success text-white" %></td></tr>
 </table>
 <div>
