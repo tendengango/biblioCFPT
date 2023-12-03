@@ -1,15 +1,16 @@
+<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
 <p id="notice"><%= notice %></p>
 
-<h1>Librarian Panel</h1>
+<h1>Panneau Administration Bibliothècaire </h1>
 Name: <%= current_librarian.name %><br>
 Email: <%=  current_librarian.email %><br>
 <br>
 <br>
 <table>
-    <th><strong>Librarian Rights</strong></th>
+    <th><strong>Autorisations des Bibliothecaires</strong></th>
 	<tr><td></tr></td>
 	<tr><td></tr></td>
-	<tr><td><%= link_to 'Edit Profile', edit_librarian_path(current_librarian) %></td></tr>
+	<tr><td><%= link_to 'Editer Profil', edit_librarian_path(current_librarian) %></td></tr>
 	<tr><td></tr></td>
-	<tr><td>Your profile has not been approved yet. Please ask the Administrator to approve it.</tr></td>
+	<tr><td>Votre profil n'a pas encore été approuvé. Veuillez demander à l'administrateur de l'approuver.</tr></td>
 </table>

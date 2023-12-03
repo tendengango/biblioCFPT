@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag 'style.css' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -14,8 +15,8 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <%= link_to "Biblio CFPT", root_path, class: "navbar-brand bg-transparent" %>
     
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
+      <div class="collapse navbar-collapse justify-content-end " id="navbarNavAltMarkup">
+        <div class="navbar-nav" id="menu">
           <% if student_signed_in?%>
           <%= link_to "Logout", destroy_student_session_path, method: :delete, class:"text-bg-primary p-3" %>
           <%= link_to 'Retour', students_path, class:"text-bg-primary p-3" %>

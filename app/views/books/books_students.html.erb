@@ -4,9 +4,9 @@
 <h1>Livres</h1>
 <%= form_tag(search_path, :method => "get" , :required => true) do %>  
   
-  <%= radio_button_tag(:search_by,"title",:checked => true,) %>Title
-  <%= radio_button_tag(:search_by, "authors")%>Author
-  <%= radio_button_tag(:search_by, "published")%>Published Date
+  <%= radio_button_tag(:search_by,"title",:checked => true,) %>Titre
+  <%= radio_button_tag(:search_by, "authors")%>Auteurs
+  <%= radio_button_tag(:search_by, "published")%>Date Publication
   
     <%= search_field_tag :search, params[:search], placeholder: "Search" , :required => true %>  
       <%= button_tag do%> 
@@ -16,18 +16,18 @@
 <% end %>
 
 <br>
-<br><br><br><h3><u>All Books</u></h3>
+<br><br><br><h3><u>Tous les Livres</u></h3>
 <table>
   <thead>
     <tr>
       <th>Isbn</th>
-      <th>Title</th>
-      <th>Authors</th>
-      <th>Language</th>
-      <th>Published</th>
+      <th>Titre</th>
+      <th>Auteurs</th>
+      <th>Langue</th>
+      <th>Date Publication</th>
       <th>Edition</th>
-      <th>Summary</th>
-      <th>Availability</th>
+      <th>Resumé</th>
+      <th>Disponibilité</th>
     </tr>
   </thead>
 
@@ -42,21 +42,21 @@
         <td><%= book.edition %></td>
         <td><%= book.summary %></td>
         
-                <% if book.quantity > 0 %> 
-          <td><%= "Available" %></td>
+                <% if book.available_quantity > 0 %> 
+          <td><%= "Disponible" %></td>
         <%else%>
-        <td><%= "Unavailable" %></td>
+        <td id="error"><%= "Indisponible" %></td>
         <%end%>
         <% if current_admin.nil? %>
-          <td><%= link_to 'Show', book %></td>
-          <% if book.quantity < 1 %> 
-            <% flash[:notice] = "Checkout not possible!!"%> 
+          <td><%= link_to 'Show', book, class:"p-3 mb-2 bg-primary text-white"  %></td>
+          <% if book.available_quantity < 1 %> 
+            <% flash[:notice] = "Emprunt pas possible!!"%> 
           <%else%>
-            <td><%= link_to 'Checkout', controller: "books", action: "checkout", id: book %></td>
+            <td><%= link_to 'Emprunter', controller: "books", action: "checkout", id: book %></td>
           <%end%>
           
         <% else %>
-          <td><%= link_to 'View Book History', controller: "books", action: "viewBookHistory", id: book %></td>
+          <td><%= link_to 'Historique du Livre', controller: "books", action: "viewBookHistory", id: book %></td>
         <%end%>
       </tr>
     <% end %>

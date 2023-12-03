@@ -1,10 +1,11 @@
-<h2>Sign up</h2>
+<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
+<h2>Inscription</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "librarians/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :nom %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
   </div>
 
@@ -16,7 +17,7 @@
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> caractères minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
@@ -29,7 +30,7 @@
   <div class="field">
     <%= f.hidden_field :approved, :value => 'No' %>
   </div>
-  <strong>Note:</strong> Ask an Administrator to approve your account first.<br><br>
+  <strong>Note:</strong> Demandez d'abord à un administrateur d'approuver votre compte.<br><br>
 
   <div class="actions">
     <%= f.submit "Sign up" %>

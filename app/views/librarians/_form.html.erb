@@ -14,7 +14,7 @@
   <% end %>
 <div class="container">
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :nom %>
     <%= form.text_field :name %>
   </div>
 
@@ -31,7 +31,7 @@
 
   <% if current_librarian.nil? %>
       <div class="field">
-      <%= form.label :approved %>
+      <%= form.label :approuvé %>
       <%= form.select :approved, ['Yes', 'No']%>
       </div>
   <% end %>

@@ -9,7 +9,7 @@ class StudentsController < ApplicationController
     end
 	if librarian_signed_in?
       sign_out :student
-      redirect_to librarians_path , notice: 'Action not allowed.'
+      redirect_to librarians_path , notice: 'Action non autorisée.'
     end
 
     @students = Student.all
@@ -19,7 +19,7 @@ class StudentsController < ApplicationController
   def show
     if librarian_signed_in?
       sign_out :student
-      redirect_to librarians_path , notice: 'Action not allowed.'
+      redirect_to librarians_path , notice: 'Action non autorisée.'
     end
   end
 
@@ -27,7 +27,7 @@ class StudentsController < ApplicationController
   def new
     if librarian_signed_in?
       sign_out :student
-      redirect_to librarians_path , notice: 'Action not allowed.'
+      redirect_to librarians_path , notice: 'Action non autorisée.'
     else
     @student = Student.new
   end
@@ -37,7 +37,7 @@ class StudentsController < ApplicationController
   def edit
     if librarian_signed_in?
       sign_out :student
-      redirect_to librarians_path , notice: 'Action not allowed.'
+      redirect_to librarians_path , notice: 'Action non autorisée.'
     end
   end
 
@@ -45,14 +45,14 @@ class StudentsController < ApplicationController
   def create
     if librarian_signed_in?
       sign_out :student
-      redirect_to librarians_path , notice: 'Action not allowed.'
+      redirect_to librarians_path , notice: 'Action non autorisée.'
     else
     @student = Student.new(student_params)
 
     respond_to do |format|
       if @student.save
         UserMailer.with(to: @student.email, name: @student.name).complete_sign_up.deliver_later
-        format.html { redirect_to student_url(@student), notice: "Student was successfully created." }
+        format.html { redirect_to student_url(@student), notice: "L'étudiant a été créé avec succès." }
         format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -66,11 +66,11 @@ class StudentsController < ApplicationController
   def update
      if librarian_signed_in?
       sign_out :student
-      redirect_to librarians_path , notice: 'Action not allowed.'
+      redirect_to librarians_path , notice: 'Action non autorisée.'
     else
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to student_url(@student), notice: "Student was successfully updated." }
+        format.html { redirect_to student_url(@student), notice: "L'étudiant a été mis à jour avec succès." }
         format.json { render :show, status: :ok, location: @student }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -84,17 +84,17 @@ class StudentsController < ApplicationController
   def destroy
     if librarian_signed_in?
       sign_out :student
-      redirect_to librarians_path , notice: 'Action not allowed.'
+      redirect_to librarians_path , notice: 'Action non autorisée.'
     else
     @student.destroy
     if current_admin.nil?
       respond_to do |format|
-        format.html { redirect_to students_url, notice: "Student was successfully destroyed." }
+        format.html { redirect_to students_url, notice: "L'Etudiant a été détruit avec succès." }
         format.json { head :no_content }
       end
     else
 			respond_to do |format|
-			  format.html { redirect_to show_students_url, notice: 'Student was successfully removed.' }
+			  format.html { redirect_to show_students_url, notice: 'L\'Etidiant a été supprimé avec succès.' }
 			  format.json { head :no_content }
 		  end
     end

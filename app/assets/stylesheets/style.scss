@@ -1,0 +1,20 @@
+.navbar-nav li a{
+  color:#fbf8f8 !important;
+}
+nav a:hover {
+  background-color: transparent;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+.navbar-default .navbar-nav > li > a {
+ color: #0e0c0c;
+ }
+#menu a{color: white;}
+#error {
+  background-color: red;
+}
+.history {
+  color: rgb(0, 13, 255); /* Set the link color */
+  text-decoration: none; /* Underline the link text */
+  background-color:rgb(205, 79, 79) !important;
+}

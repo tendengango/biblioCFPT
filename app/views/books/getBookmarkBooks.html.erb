@@ -1,19 +1,18 @@
-<h2>Checked Out Books</h2>
+<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
+<h2>Livres Prêtés</h2>
 <table>
   <thead>
     <tr>
       <th>Isbn</th>
-      <th>Title</th>
-      <th>Authors</th>
-      <th>Language</th>
-      <th>Published</th>
-      <th>Edition</th>
-      
-      
-      <th>Summary</th>
+      <th>Titre</th>
+      <th>Auteurs</th>
+      <th>Langue</th>
+      <th>Date Publication</th>
+      <th>Edition</th>   
+      <th>Resumé</th>
      
-      
       <th colspan="6"></th>
+      
     </tr>
     </thead>
     <tbody>
@@ -27,12 +26,11 @@
         <td><%= book.published %></td>
         <td><%= book.edition %></td>
         
-        
         <td><%= book.summary %></td>
        
         
         
-        <td><%= link_to 'Return Book', controller: "books", action: "returnBook", id: book %></td>
+        <td><%= link_to 'Cliquer pour rendre Rendre', controller: "books", action: "returnBook", id: book %></td>
       </tr>
     <% end %>
     </tbody>        

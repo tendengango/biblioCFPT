@@ -6,14 +6,13 @@
   <thead>
     <tr>
       <th>Isbn</th>
-      <th>Title</th>
-      <th>Authors</th>
-      <th>Language</th>
-      <th>Published</th>
+      <th>Titre</th>
+      <th>Auteurs</th>
+      <th>Langue</th>
+      <th>Date Publication</th>
       <th>Edition</th>
-      
-      <th>Summary</th>
-      <th>Quantity</th>
+      <th>Résumé</th>
+      <th>Quantité Disponible</th>
       
     </tr>
   </thead>
@@ -27,10 +26,10 @@
         <td><%= book.language %></td>
         <td><%= book.published %></td>
         <td><%= book.edition %></td>
-        
         <td><%= book.summary %></td>
-        <td><%= book.quantity %></td>
+        <td><%= book.available_quantity %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>

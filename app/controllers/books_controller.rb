@@ -9,6 +9,7 @@ class BooksController < ApplicationController
   def books_students	
 	@books = Book.all.where(:email => current_student.email)
 	@books_all = Book.all
+  @books_available= Book.all
   end
 
   # GET /books/1 or /books/1.json
@@ -38,9 +39,11 @@ class BooksController < ApplicationController
       redirect_to students_path, notice: 'Action not allowed.'
 	else
     @book = Book.new(book_params)
+     @available_quantity = @book
 
     respond_to do |format|
       if @book.save
+        #@book.update(available_quantity: book_params[:quantity])
         format.html { redirect_to book_url(@book), notice: "Book was successfully created." }
         format.json { render :show, status: :created, location: @book }
       else
@@ -77,17 +80,17 @@ class BooksController < ApplicationController
 
     if current_admin.nil? and current_librarian.nil?
     respond_to do |format|
-      format.html { redirect_to books_url, notice: "Book was successfully destroyed." }
+      format.html { redirect_to books_url, notice: "Le livre a été supprimé avec succès." }
       format.json { head :no_content }
     end
   elsif !current_admin.nil?
 			respond_to do |format|
-			  format.html { redirect_to show_books_path, notice: 'Book was successfully destroyed.' }
+			  format.html { redirect_to show_books_path, notice: 'Le livre a été dsupprimé avec succès.' }
 			  format.json { head :no_content }
 			end		
 		elsif !current_librarian.nil?
 			respond_to do |format|
-			  format.html { redirect_to librarian_book_view_path, notice: 'Book was successfully destroyed.' }
+			  format.html { redirect_to librarian_book_view_path, notice: 'Le livre a été supprimé avec succès..' }
 			  format.json { head :no_content }
 			end		
 		end
@@ -109,8 +112,8 @@ class BooksController < ApplicationController
 			redirect_to('index', alert: "Empty field!")
 	  end  
   end
-  def validity
-    @validity=15
+ def available_quantity
+    @available_quantity = avalable_quantity
   end
 
   def librarian_book_view
@@ -120,20 +123,25 @@ class BooksController < ApplicationController
  def checkout # check if the given book is a special book or not
    
     @book = Book.find(params[:id])
+    @book.available_quantity=@book.quantity
    
           if Checkout.where(:student_id => current_student.id , :book_id => @book.id, :return_date => nil).first.nil?
             @checkout = Checkout.new(:student_id => current_student.id , :book_id => @book.id , :issue_date => Date.today , :return_date =>nil)
-            flash[:notice] = "Book Successfully Checked Out"
+            flash[:notice] = "Livre prêté avec succès"
             puts params[:id]
             puts @book.quantity
-            @book.decrement(:quantity)
-            puts @book.quantity
+            puts @book.available_quantity
+            @book.decrement(:available_quantity)
+            puts @book.available_quantity
+            #puts @book.quantity
+            #@book.decrement(:quantity)
+            #puts @book.quantity
             @user = current_student
             UserMailer.checkout_email(@user,@book).deliver_now
             @checkout.save!
             @book.save!
           else 
-            flash[:notice] = "Book Already Checked Out!!"
+            flash[:notice] = "Livre déjà prêté !!"
           end  
         #end
       #else
@@ -146,7 +154,7 @@ class BooksController < ApplicationController
             flash[:notice] = "Book Hold Request Is Already Placed"
           end
         else
-          flash[:notice] = "Book Already Checked Out!!!"
+          flash[:notice] = "Vous avez déjà emprunté ce Livre !!!"
         end
     
       if !current_student.nil?
@@ -161,8 +169,8 @@ class BooksController < ApplicationController
     if !@checkouts.nil?
       @fines = Array.new
       @checkouts.each do |checkout|
-        if checkout.issue_date + 15 < Date.today
-          delays = (Date.today - checkout.issue_date).to_i - 15
+        if checkout.issue_date + 1 > Date.today
+          delays = (Date.today - checkout.issue_date).to_i - 1
           #fine_per_day  = Library.find(Book.find(checkout.book_id).library_id).overdue_fines
           @fines.push({:delay => delays , :book_id => checkout.book_id})
         else
@@ -182,15 +190,15 @@ class BooksController < ApplicationController
 
   def returnBook
     @book = Book.find(params[:id])
-    if(@book.quantity>0) 
+    if(@book.available_quantity>0) 
       if !Checkout.where(:student_id => current_student.id , :book_id => @book.id, :return_date => nil).first.nil?
         @checkout = Checkout.where(:student_id => current_student.id , :book_id => @book.id, :return_date => nil).first
         @checkout.update( :return_date => Date.today)
         @checkout.save!
-        flash[:notice] = "Book Successfully returned"
+        flash[:notice] = "Livre retourné avec succès"
         @user = current_student
         UserMailer.returnbook_email(@user,@book).deliver_now
-        @book.increment(:quantity)
+        @book.increment(:available_quantity)
         @book.save!
       else 
         flash[:notice] = "Book is not checked out"
@@ -201,7 +209,7 @@ class BooksController < ApplicationController
         if @hold_request.nil?
           @checkout = Checkout.where(:student_id => current_student.id , :book_id => @book.id , :return_date => nil)
           @checkout.update( :return_date => Date.today)
-          flash[:notice] = "Book Successfully returned"
+          flash[:notice] = "Livre retourné avec succès"
           @user = current_student
           UserMailer.returnbook_email(@user,@book).deliver_now
           @book.increment(:count)
@@ -211,7 +219,7 @@ class BooksController < ApplicationController
           @checkout.update( :return_date => Date.today)
           @checkout_new = Checkout.new(:student_id => @hold_request.student_id , :book_id => @hold_request.book_id , :issue_date => Date.today , :return_date =>nil , :validity => @book.borrow_limit)
           @checkout_new.save!
-          flash[:notice] = "Book Successfully returned"
+          flash[:notice] = "Livre retourné avec succès"
           UserMailer.checkout_email(User.find(@hold_request.student_id),@book).deliver_now
           @hold_request.destroy
         end
@@ -237,11 +245,11 @@ class BooksController < ApplicationController
     if !@checkouts.nil?
       @fines = Array.new
       @checkouts.each do |checkout|
-        if checkout.issue_date + 1 > Date.today
+        if checkout.issue_date + 1 < Date.today
           delays = (Date.today - checkout.issue_date).to_i - 1
-          @fines.push({:delay => delays, :book_id => checkout.book_id , :student_id => checkout.student_id})
+          @fines.push({:delay => delays, :book_id => checkout.book_id , :student_id => checkout.student_id, :issue_date =>checkout.issue_date})
         else
-          @fines.push({:delay=>0, :book_id => checkout.book_id ,:student_id => checkout.student_id})
+          @fines.push({:delay => 0, :book_id => checkout.book_id ,:student_id => checkout.student_id, :issue_date =>checkout.issue_date})
         end
       end
     end
@@ -269,6 +277,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:isbn, :title, :authors, :language, :published, :edition, :summary, :quantity, :portrait)
+      params.require(:book).permit(:isbn, :title, :authors, :language, :published, :edition, :summary, :quantity, :available_quantity, :portrait)
     end
 end

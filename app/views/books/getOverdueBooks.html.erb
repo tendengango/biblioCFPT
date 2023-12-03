@@ -3,13 +3,11 @@
 <table>
   <thead>
     <tr>
-      <th>Student Name</th>
-      <th>Title</th>
-      <th>Author</th>
+      <th>Nom Etudiant</th>
+      <th>Titre</th>
+      <th>Auteurs</th>
       <th>Edition</th>
-     
-      
-      
+      <th>date du prêt</th>
     </tr>
   </thead>
 
@@ -22,7 +20,7 @@
           <td><%= Book.find(fine[:book_id]).title %></td>
           <td><%= Book.find(fine[:book_id]).authors %></td>
           <td><%= Book.find(fine[:book_id]).edition %></td>
-          
+          <td><%= Checkout.find(fine[:book_id]).issue_date %></td>  
           
         </tr>
       <%end %>

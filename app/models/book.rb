@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  validates :isbn, presence: true, length: { maximum: 12 }
+  validates :isbn, presence: true, length: { maximum: 15 }
   validates :title, presence: true, length: { maximum: 30 }
   validates :authors, presence: true
   validates :published, presence: true
