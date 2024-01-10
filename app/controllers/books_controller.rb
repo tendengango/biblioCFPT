@@ -85,7 +85,7 @@ class BooksController < ApplicationController
     end
   elsif !current_admin.nil?
 			respond_to do |format|
-			  format.html { redirect_to show_books_path, notice: 'Le livre a été dsupprimé avec succès.' }
+			  format.html { redirect_to show_books_path, notice: 'Le livre a été supprimé avec succès.' }
 			  format.json { head :no_content }
 			end		
 		elsif !current_librarian.nil?
@@ -113,7 +113,7 @@ class BooksController < ApplicationController
 	  end  
   end
  def available_quantity
-    @available_quantity = avalable_quantity
+    @available_quantity = available_quantity
   end
 
   def librarian_book_view
@@ -146,14 +146,14 @@ class BooksController < ApplicationController
         #end
       #else
         if Checkout.where(:student_id => current_student.id , :book_id => @book.id).first.nil?
-          if HoldRequest.where(:student_id => current_student.id , :book_id => @book.id).first.nil?
-            @hold_request =  HoldRequest.new(:student_id => current_student.id , :book_id => @book.id)
-            @hold_request.save!
-            flash[:notice] = "Book Hold Request Placed"
-          else 
-            flash[:notice] = "Book Hold Request Is Already Placed"
-          end
-        else
+          #if HoldRequest.where(:student_id => current_student.id , :book_id => @book.id).first.nil?
+            #@hold_request =  HoldRequest.new(:student_id => current_student.id , :book_id => @book.id)
+            #@hold_request.save!
+            #flash[:notice] = "Book Hold Request Placed"
+          #else 
+            #flash[:notice] = "Book Hold Request Is Already Placed"
+          #end
+        #else
           flash[:notice] = "Vous avez déjà emprunté ce Livre !!!"
         end
     
@@ -180,9 +180,9 @@ class BooksController < ApplicationController
     end
   end
 
-  def viewHoldRequestForLibrarian
-    @holdreqs = HoldRequest.where(:book_id => Book.where(:library_id => Library.select('id').where(:name => current_librarian.library) ))
-  end
+  # def viewHoldRequestForLibrarian
+  #   @holdreqs = HoldRequest.where(:book_id => Book.where(:library_id => Library.select('id').where(:name => current_librarian.library) ))
+  # end
 
   def viewBookHistory
     @checkouts = Checkout.where.not(:return_date => nil ).where(:book_id => params[:id])
@@ -190,7 +190,7 @@ class BooksController < ApplicationController
 
   def returnBook
     @book = Book.find(params[:id])
-    if(@book.available_quantity>0) 
+    if(@book.available_quantity>=0) 
       if !Checkout.where(:student_id => current_student.id , :book_id => @book.id, :return_date => nil).first.nil?
         @checkout = Checkout.where(:student_id => current_student.id , :book_id => @book.id, :return_date => nil).first
         @checkout.update( :return_date => Date.today)
@@ -217,7 +217,7 @@ class BooksController < ApplicationController
         else
           @checkout = Checkout.where(:student_id => current_student.id , :book_id => @book.id )
           @checkout.update( :return_date => Date.today)
-          @checkout_new = Checkout.new(:student_id => @hold_request.student_id , :book_id => @hold_request.book_id , :issue_date => Date.today , :return_date =>nil , :validity => @book.borrow_limit)
+          #@checkout_new = Checkout.new(:student_id => @hold_request.student_id , :book_id => @hold_request.book_id , :issue_date => Date.today , :return_date =>nil , :validity => @book.borrow_limit)
           @checkout_new.save!
           flash[:notice] = "Livre retourné avec succès"
           UserMailer.checkout_email(User.find(@hold_request.student_id),@book).deliver_now
@@ -265,7 +265,7 @@ class BooksController < ApplicationController
   end
 
   def list_checkedoutBooksAndStudentsAdmin
-	#@results = Checkout.joins('INNER JOIN Students s ON s.id = Checkouts.student_id INNER JOIN Books b ON b.id = Checkouts.book_id')
+	@results = Checkout.joins('INNER JOIN Students s ON s.id = Checkouts.student_id INNER JOIN Books b ON b.id = Checkouts.book_id')
 	@results = Checkout.select(:'students.name',:'students.email',:'books.isbn',:'books.title',:'books.authors',:issue_date,:return_date,:'books.language',:'books.published',:'books.edition',:'books.summary').joins(:student).joins(:book)
   end
   

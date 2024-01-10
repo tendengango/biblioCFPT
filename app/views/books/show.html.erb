@@ -57,13 +57,13 @@
 	<%= link_to 'Back', books_path %>
 <% end %>
 <% if !current_admin.nil? %>
-	<td><%= link_to 'Edit', edit_book_path %></td>
-	<%= link_to 'Back', show_books_path %>
+	<td><%= link_to 'Editer', edit_book_path,class:"p-3 mb-2 bg-success text-white" %></td>
+	<%= link_to 'Retour', show_books_path, class:"p-3 mb-2 bg-primary text-white" %>
 <% end %>
 <% if !current_librarian.nil? %>
-	<td><%= link_to 'Edit', edit_book_path %></td>
-	<%= link_to 'Back', librarian_book_view_path %>
+	<td><%= link_to 'Editer', edit_book_path, class:"p-3 mb-2 bg-primary text-white" %></td>
+	<%= link_to 'Retour', librarian_book_view_path %>
 <% end %>
 <% if !current_student.nil? %>
-	<%= link_to 'Back', books_students_path %>
+	<%= link_to 'Retour', books_students_path, class:"p-2 mb-2 bg-primary text-white" %>
 <% end %>

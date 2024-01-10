@@ -1,4 +1,4 @@
-<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
+<div class="table table-bordered table-striped col-md-4 container  py-5 h-100">
 <h2>Connexion</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -15,7 +15,7 @@
   <% if devise_mapping.rememberable? %>
     <div class="field">
       <%= f.check_box :remember_me %>
-      <%= f.label :Enregistrez_moi %>
+      <%= f.label :se_souvenir_de_moi %>
     </div>
   <% end %>
 

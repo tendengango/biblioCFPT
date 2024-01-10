@@ -1,4 +1,4 @@
-<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
+<div class="table table-bordered table-striped col-md-6 container  py-5 h-100">
 <h2>Inscription</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -33,7 +33,7 @@
   <strong>Note:</strong> Demandez d'abord à un administrateur d'approuver votre compte.<br><br>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class:"p-2 mb-2 bg-primary text-white" %>
   </div>
 <% end %>
 
