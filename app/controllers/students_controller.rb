@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[ show edit update destroy ]
-
+  #before_action :authenticate_student!
   # GET /students or /students.json
   def index
     if admin_signed_in?
@@ -41,16 +41,40 @@ class StudentsController < ApplicationController
     end
   end
 
+    def current_or_guest_student
+    if current_student
+      if session[:guest_student_id] && session[:guest_student_id] != current_student.id
+        logging_in
+        # reload guest_user to prevent caching problems before destruction
+        guest_student(with_retry = false).try(:reload).try(:destroy)
+        session[:guest_student_id] = nil
+      end
+      current_student
+    else
+      guest_student
+    end
+  end
+
+  def guest_student(with_retry = true)
+    # Cache the value the first time it's gotten.
+    @cached_guest_student ||= Student.find(session[:guest_student_id] ||= create_guest_student.id)
+
+  rescue ActiveRecord::RecordNotFound # if session[:guest_user_id] invalid
+     session[:guest_student_id] = nil
+     guest_student if with_retry
+  end
+
   # POST /students or /students.json
   def create
     if librarian_signed_in?
       sign_out :student
       redirect_to librarians_path , notice: 'Action non autorisée.'
     else
-    @student = Student.new(student_params)
-
+    #@student = Student.new(student_params)
+    @student = Student.new(student_params)? Student.new(student_params) : Student.new_guest
     respond_to do |format|
       if @student.save
+        session[:student_id] = @student.id
         UserMailer.with(to: @student.email, name: @student.name).complete_sign_up.deliver_later
         format.html { redirect_to student_url(@student), notice: "L'étudiant a été créé avec succès." }
         format.json { render :show, status: :created, location: @student }
@@ -94,7 +118,7 @@ class StudentsController < ApplicationController
       end
     else
 			respond_to do |format|
-			  format.html { redirect_to show_students_url, notice: 'L\'Etidiant a été supprimé avec succès.' }
+			  format.html { redirect_to show_students_url, notice: 'L\'Etudiant a été supprimé avec succès.' }
 			  format.json { head :no_content }
 		  end
     end
@@ -110,12 +134,19 @@ class StudentsController < ApplicationController
       @student = Student.find(params[:id])
     end
 
+    def create_guest_student
+      s = Student.new(name: "guest", email: "guest_#{Time.now.to_i}#{rand(100)}@example.com")
+      s.save!(validate: false)
+      session[:guest_student_id] = s.id
+      s
+    end
+
     # Only allow a list of trusted parameters through.
     def student_params
       params.require(:student).permit(:matricule, :email, :name, :password, :classname)
     end
     def book_params
-    params.require(:book).permit(:isbn, :title, :authors, :language, :published_date, :edition, :cover, :subject, :summary, :quantity)
+      params.require(:book).permit(:isbn, :title, :authors, :language, :published_date, :edition, :cover, :subject, :summary, :quantity, :portrait)
     end
 end
 

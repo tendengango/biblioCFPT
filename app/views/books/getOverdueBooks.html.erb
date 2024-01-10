@@ -32,7 +32,7 @@
 <br>
 
 <% if !current_librarian.nil? %>
-	<%= link_to 'Back', librarians_path %>
+	<%= link_to 'Back', librarians_path, class:"p-3 mb-2 bg-primary text-white" %>
 <% else %>
-	<%= link_to 'Back', show_books_path %>
+	<%= link_to 'Back', show_books_path, class:"p-3 mb-2 bg-primary text-white" %>
 <% end %>

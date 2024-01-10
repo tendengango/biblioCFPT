@@ -4,14 +4,35 @@
 <div class="container">
 <table class="table table-bordered table-striped text-center">
 	<th><strong>Votre Bibliothèque en Ligne</strong></th>
+	<th width='50%'><strong >Mode d'emploi</strong></th>
+    <tr><td><strong>Vous êtes Etudiant</strong></td>
+    <td rowspan="6" class="position">Vous pouvez acceder à l'application en fonction de votre profil : Administrateur, Bibliothécaire ou Étudiant. Un lien d’inscription et de connexion est disponible.<br>
+    Un etudiant s'enregistre et se connecte sur la plateforme et peut faire des emprunts de livres. Il peut emprunter autant de livres pour une durée de 15 jours.<br>
+    Pour etre bibliothecaire Vous devez vous inscrire en utilisant le lien d'inscription du bibliothécaire, puis etre approuver par l'administrateur.<br>
+    Un administrateur est capable d'effectuer toutes les opérations effectuées par le bibliothécaire ou l'étudiant. L'administrateur est capable de :Créer/Modifier des comptes Bibliothécaire ou Étudiant
+    Créer/Modifier/Supprimer des bibliothèques et des livres.
+    Afficher la liste des utilisateurs (étudiants et bibliothécaires) et les détails de leur profil (sauf mot de passe)
+    Consultez la liste des livres, ainsi que des informations détaillées.
+    Consultez la liste des livres prétés.
+    Consultez la liste des étudiants dont les livres sont en retard.
+    Consultez l’historique d’emprunt de chaque livre.
+    Supprimer un étudiant/un livre/un bibliothécaire du système
+    
+    </td></tr>
+
+    <tr><td><%= link_to 'Connexion Etudiant', new_student_session_path, class:"p-3 mb-2 bg-success text-white" %>
+    <%= link_to 'Connexion Invité', students_path, method: :post, class:"p-3 mb-2 bg-success text-white" %>
+    </td></tr>
+	<tr><td><strong>Vous êtes Bibliothècaire</strong></td></tr>
+    <tr><td><%= link_to 'Connexion Bibliothècaire', new_librarian_session_path, class:"p-3 mb-2 bg-success text-white" %>
+    <%= link_to 'Connexion Bibliothècaire', librarians_path,method: :post, class:"p-3 mb-2 bg-success text-white" %>
+    </td></tr>
 	
-    <tr><td><strong>Vous êtes Etudiant</strong></td><tr>
-    <tr><td><%= link_to 'Connexion Etudiant', new_student_session_path, class:"p-3 mb-2 bg-success text-white" %></td></tr>
-	
-	<tr><td><strong>Vous êtes Bibliothècaire</strong></td><tr>
-    <tr><td><%= link_to 'Connexion Bibliothècaire', new_librarian_session_path, class:"p-3 mb-2 bg-success text-white" %></td></tr>
-	
-	<tr><td><strong>Vous êtes Administrateur</strong></td><tr>
-    <tr><td><%= link_to 'Connexion Administrateur', new_admin_session_path, class:"p-3 mb-2 bg-success text-white" %></td></tr>
+	<tr><td><strong>Vous êtes Administrateur</strong></td></tr>
+    
+    
+    <tr><td><%= link_to 'Connexion Administrateur', new_admin_session_path, class:"p-3 mb-2 bg-success text-white" %>
+   <%= link_to 'Connexion Admin Invité', admins_path, method: :post, class:"p-3 mb-2 bg-success text-white" %></td>
+    </tr>
 </table>
 <div>

@@ -13,7 +13,10 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # def create
   #   super
   # end
-
+  #  def create
+  #     super
+  #     current_or_guest_admin
+  #  end
   # GET /resource/edit
   # def edit
   #   super
@@ -38,6 +41,17 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+    # def create
+    #   super
+    #   current_or_guest_admin
+    # end
+
+   def create_guest_admin
+      a = Admin.new(name: "guest", email: "guest_#{Time.now.to_i}#{rand(100)}@example.com")
+      a.save!(validate: false)
+      session[:guest_admin_id] = a.id
+      a
+    end
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.

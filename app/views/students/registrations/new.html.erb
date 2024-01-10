@@ -1,4 +1,4 @@
-<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
+<div class="table table-bordered table-striped col-md-6 container  py-5 h-100">
 <h2>Inscription</h2>
  
 
@@ -17,12 +17,12 @@
 
   <div class="field">
     <%= f.label :matricule %><br />
-    <%= f.text_field :matricule %>
+    <%= f.text_field :matricule , placeholder: "ex:M20078"%>
   </div>
 
   <div class="field">
-    <%= f.label :classname %><br />
-    <%= f.text_field :classname %>
+    <%= f.label :classe %><br />
+    <%= f.text_field :classname, placeholder: "ex:BTS IIR1" %>
   </div>
   
 
@@ -40,7 +40,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class:"p-2 mb-2 bg-primary text-white" %>
   </div>
 <% end %>
 

@@ -1,5 +1,5 @@
 <div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
-<h2>Livres Prêtés</h2>
+<h2>Livres empruntés</h2>
 <table>
   <thead>
     <tr>
@@ -30,7 +30,7 @@
        
         
         
-        <td><%= link_to 'Cliquer pour rendre Rendre', controller: "books", action: "returnBook", id: book %></td>
+        <td><%= link_to 'Cliquer Rendre', controller: "books", action: "returnBook", id: book %></td>
       </tr>
     <% end %>
     </tbody>        

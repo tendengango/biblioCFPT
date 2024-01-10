@@ -1,5 +1,5 @@
 <div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
-<h1>Liste Etudiants</h1>
+<h1>Liste des Etudiants</h1>
 
 <table>
   <thead>
@@ -15,8 +15,9 @@
       <tr>
         <td><%= student.name %></td>
         <td><%= student.email %></td>
-		    <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
+		    <td><%= link_to 'Afficher', student, class:"p-3 mb-2 bg-primary text-white" %></td>
+        <td><%= link_to 'Editer', edit_student_path(student), class:"p-3 mb-2 bg-success text-white" %></td>
+        <td><%= link_to 'Supprimer', student, method: :delete, data: { confirm: 'Vouler-vous vraiment supprimer?' }, class:"p-3 mb-2 bg-danger text-white" %></td>
       </tr>
     <% end %>
   </tbody>

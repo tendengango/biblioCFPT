@@ -5,12 +5,12 @@
   <thead>
     <tr>
       <th>Isbn</th>
-      <th>Title</th>
-      <th>Authors</th>
-      <th>Language</th>
-      <th>Published</th>
+      <th>Titre</th>
+      <th>Auteurs</th>
+      <th>Langue</th>
+      <th>Date Publication</th>
     
-      <th>Summary</th>
+      <th>Résumé</th>
       
      
     </tr>
@@ -39,7 +39,7 @@
 <% end %>
 
 <% if !current_student.nil? %>
-	<%= link_to 'Back', books_students_path %>
+	<%= link_to 'Retour', books_students_pathclass:"p-2 mb-2 bg-primary text-white" %>
 <% else %>
-	<%= link_to 'Back', books_path %>
+	<%= link_to 'Retour', books_pathclass:"p-2 mb-2 bg-primary text-white" %>
 <% end %>

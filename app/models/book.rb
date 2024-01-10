@@ -7,5 +7,6 @@ class Book < ApplicationRecord
   validates :language, presence: true
   validates :quantity, presence: true, length: { maximum: 2 }
   validates_uniqueness_of :isbn, confirmation: { case_sensitive: false }
-  has_one_attached :portrait
+  has_one_attached :portrait, dependent: :destroy
+  has_many :checkout, dependent: :restrict_with_error
 end

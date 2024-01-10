@@ -3,11 +3,11 @@
 
 <%= form_tag(search_path, :method => "get" , :required => true) do %>  
   
-  <%= radio_button_tag(:search_by,"title",:checked => true,) %>Title
-  <%= radio_button_tag(:search_by, "authors")%>Author
-  <%= radio_button_tag(:search_by, "published")%>Published Date
+  <%= radio_button_tag(:search_by,"title",:checked => true,) %>Titre
+  <%= radio_button_tag(:search_by, "authors")%>Auteurs
+  <%= radio_button_tag(:search_by, "published")%>Date Publication
   
-    <%= search_field_tag :search, params[:search], placeholder: "Search" , :required => true %>  
+    <%= search_field_tag :search, params[:search], placeholder: "Chercher" , :required => true %>  
       <%= button_tag do%> 
 	  <%= t('Search')%>
 	  <% end %>
@@ -36,10 +36,10 @@
         <% if current_admin.nil? %>          
           <td><%= link_to 'Checkout', controller: "books", action: "checkout", id: book, class:"p-3 mb-2 bg-primary text-white" %></td> 
         <% else %>
-		  <td><%= link_to 'Show', book, class:"p-3 mb-2 bg-primary text-white" %></td>
-		  <td><%= link_to 'Edit', edit_book_path(book), class:"p-3 mb-2 bg-success text-white" %></td>
-		  <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' },class:"p-3 mb-2 bg-danger text-white" %></td>
-      <td><%= link_to 'View Book History', controller: "books", action: "viewBookHistory", id: book %></td>
+		  <td><%= link_to 'Afficher', book, class:"p-3 mb-2 bg-primary text-white" %></td>
+		  <td><%= link_to 'Editer', edit_book_path(book), class:"p-3 mb-2 bg-success text-white" %></td>
+		  <!--<td><%= link_to 'Supprimer', book, method: :delete, data: { confirm: 'Are you sure?' },class:"p-3 mb-2 bg-danger text-white" %></td>-->
+      <td><%= link_to 'Historique', controller: "books", action: "viewBookHistory", id: book , class: 'custom-link' %></td>
         <%end%>
       </tr>
     <% end %>

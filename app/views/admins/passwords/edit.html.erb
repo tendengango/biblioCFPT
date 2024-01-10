@@ -1,4 +1,5 @@
-<h2>Change your password</h2>
+<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
+<h2>Changer votre password</h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "admins/shared/error_messages", resource: resource %>

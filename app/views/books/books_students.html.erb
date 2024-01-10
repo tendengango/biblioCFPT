@@ -16,7 +16,7 @@
 <% end %>
 
 <br>
-<br><br><br><h3><u>Tous les Livres</u></h3>
+<br><br><br><h3><u>Voir les Livres</u></h3>
 <table>
   <thead>
     <tr>
@@ -26,7 +26,7 @@
       <th>Langue</th>
       <th>Date Publication</th>
       <th>Edition</th>
-      <th>Resumé</th>
+      <th>Résumé</th>
       <th>Disponibilité</th>
     </tr>
   </thead>
@@ -45,22 +45,22 @@
                 <% if book.available_quantity > 0 %> 
           <td><%= "Disponible" %></td>
         <%else%>
-        <td id="error"><%= "Indisponible" %></td>
+        <td><%= "Non disponible" %></td>
         <%end%>
         <% if current_admin.nil? %>
-          <td><%= link_to 'Show', book, class:"p-3 mb-2 bg-primary text-white"  %></td>
+          <td><%= link_to 'Afficher', book, class:"p-3 mb-2 bg-primary text-white" %></td>
           <% if book.available_quantity < 1 %> 
-            <% flash[:notice] = "Emprunt pas possible!!"%> 
+            <% flash[:notice] = "Checkout not possible!!"%> 
           <%else%>
-            <td><%= link_to 'Emprunter', controller: "books", action: "checkout", id: book %></td>
+            <td ><%= link_to 'Emprunter', controller: "books", action: "checkout", id: book, class: "book" %></td>
           <%end%>
           
         <% else %>
-          <td><%= link_to 'Historique du Livre', controller: "books", action: "viewBookHistory", id: book %></td>
+          <td><%= link_to 'View Book History', controller: "books", action: "viewBookHistory", id: book %></td>
         <%end%>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Retour', students_path %>
+<%= link_to 'Retour', students_path, class:"p-3 mb-2 bg-primary text-white" %>
