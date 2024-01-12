@@ -1,4 +1,4 @@
-<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
+<div class="table table-bordered table-striped col-md-6 container  py-5 h-100">
 <%= form_with(model: student, local: true) do |form| %>
   <% if student.errors.any? %>
     <div id="error_explanation">
@@ -13,32 +13,32 @@
   <% end %>
 
   
-  <div class="field">
-    <%= form.label :nom %>
+  <div class="mb-3">
+    <%= form.label :nom, { class: "form-label"} %><br />
     <%= form.text_field :name %>
   </div>
 
-  <div class="field">
-    <%= form.label :email %>
+  <div class="mb-3">
+    <%= form.label :email, { class: "form-label"} %><br />
     <%= form.text_field :email %>
   </div>
 
-  <div class="field">
-    <%= form.label :matricule %>
+  <div class="mb-3">
+    <%= form.label :matricule, { class: "form-label"} %><br />
     <%= form.text_field :matricule %>
   </div>
 
-  <div class="field">
-    <%= form.label :classe %>
+  <div class="mb-3">
+    <%= form.label :classe, { class: "form-label"} %><br />
     <%= form.text_field :classname %>
   </div>
 
-  <div class="field">
-    <%= form.label :password %>
+  <div class="mb-3">
+    <%= form.label :password, { class: "form-label"} %><br />
     <%= form.password_field :password %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Enregistrer", class:"p-2 mb-2 bg-primary text-white" %>
   </div>
 <% end %>

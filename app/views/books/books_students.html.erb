@@ -42,14 +42,14 @@
         <td><%= book.edition %></td>
         <td><%= book.summary %></td>
         
-                <% if book.available_quantity > 0 %> 
+                <% if (book.available_quantity > 0) %> 
           <td><%= "Disponible" %></td>
         <%else%>
         <td><%= "Non disponible" %></td>
         <%end%>
         <% if current_admin.nil? %>
           <td><%= link_to 'Afficher', book, class:"p-3 mb-2 bg-primary text-white" %></td>
-          <% if book.available_quantity < 1 %> 
+          <% if (book.available_quantity < 1) %> 
             <% flash[:notice] = "Checkout not possible!!"%> 
           <%else%>
             <td ><%= link_to 'Emprunter', controller: "books", action: "checkout", id: book, class: "book" %></td>
