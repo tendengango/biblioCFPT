@@ -4,5 +4,5 @@
 <%= render 'form', student: @student %>
 
 <% if current_admin.nil? %>
-<%= link_to 'Retour', students_path %>
+<%= link_to 'Retour', students_path, class:"p-2 mb-2 bg-success text-white" %>
 <% end %>

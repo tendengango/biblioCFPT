@@ -9,7 +9,7 @@ class BooksController < ApplicationController
   def books_students	
 	@books = Book.all.where(:email => current_student.email)
 	@books_all = Book.all
-  @books_available= Book.all
+  
   end
 
   # GET /books/1 or /books/1.json
@@ -22,6 +22,7 @@ class BooksController < ApplicationController
       redirect_to students_path, notice: 'Action not allowed.'
 	else
     @book = Book.new
+    
   end
   end
 
@@ -123,13 +124,13 @@ class BooksController < ApplicationController
  def checkout # check if the given book is a special book or not
    
     @book = Book.find(params[:id])
-    @book.available_quantity=@book.quantity
+    #@book.available_quantity=@book.quantity
    
           if Checkout.where(:student_id => current_student.id , :book_id => @book.id, :return_date => nil).first.nil?
             @checkout = Checkout.new(:student_id => current_student.id , :book_id => @book.id , :issue_date => Date.today , :return_date =>nil)
             flash[:notice] = "Livre prêté avec succès"
             puts params[:id]
-            puts @book.quantity
+            #puts @book.quantity
             puts @book.available_quantity
             @book.decrement(:available_quantity)
             puts @book.available_quantity
@@ -169,8 +170,8 @@ class BooksController < ApplicationController
     if !@checkouts.nil?
       @fines = Array.new
       @checkouts.each do |checkout|
-        if checkout.issue_date + 1 > Date.today
-          delays = (Date.today - checkout.issue_date).to_i - 1
+        if checkout.issue_date + 10 > Date.today
+          delays = (Date.today - checkout.issue_date).to_i - 10
           #fine_per_day  = Library.find(Book.find(checkout.book_id).library_id).overdue_fines
           @fines.push({:delay => delays , :book_id => checkout.book_id})
         else
@@ -245,8 +246,8 @@ class BooksController < ApplicationController
     if !@checkouts.nil?
       @fines = Array.new
       @checkouts.each do |checkout|
-        if checkout.issue_date + 1 < Date.today
-          delays = (Date.today - checkout.issue_date).to_i - 1
+        if checkout.issue_date + 10 < Date.today
+          delays = (Date.today - checkout.issue_date).to_i - 10
           @fines.push({:delay => delays, :book_id => checkout.book_id , :student_id => checkout.student_id, :issue_date =>checkout.issue_date})
         else
           @fines.push({:delay => 0, :book_id => checkout.book_id ,:student_id => checkout.student_id, :issue_date =>checkout.issue_date})

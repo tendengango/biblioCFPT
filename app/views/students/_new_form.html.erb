@@ -1,4 +1,4 @@
-<div class="table table-bordered table-striped px-md-2 container  py-5 h-100">
+<div class="table table-bordered table-striped col-md-2 container  py-5 h-100">
 <%= form_with(model: student, local: true) do |form| %>
   <% if student.errors.any? %>
     <div id="error_explanation">
@@ -12,7 +12,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label :matricule %>
     <%= form.text_field :matricule %>
   </div>
